@@ -1,9 +1,5 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:music/app/data/constant/colors_constant.dart';
-
-
 
 class ExampleUiLoadingAnimation extends StatefulWidget {
   const ExampleUiLoadingAnimation({
@@ -193,18 +189,15 @@ class _ShimmerLoadingState extends State<ShimmerLoading> {
 
   @override
   void didChangeDependencies() {
-
     super.didChangeDependencies();
 
     if (_shimmerChanges != null) {
-
       _shimmerChanges!.removeListener(_onShimmerChange);
     }
     _shimmerChanges = Shimmer.of(context)?.shimmerChanges;
     if (_shimmerChanges != null) {
       _shimmerChanges!.addListener(_onShimmerChange);
     }
-  
   }
 
   @override
@@ -221,8 +214,6 @@ class _ShimmerLoadingState extends State<ShimmerLoading> {
 
   @override
   Widget build(BuildContext context) {
-
-
     // Collect ancestor shimmer info.
     final shimmer = Shimmer.of(context)!;
     if (!shimmer.isSized) {
