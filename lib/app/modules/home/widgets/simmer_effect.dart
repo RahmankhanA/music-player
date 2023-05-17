@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:music/app/data/constant/colors_constant.dart';
 
-class ExampleUiLoadingAnimation extends StatefulWidget {
-  const ExampleUiLoadingAnimation({
+class ShimmerLoadingWidget extends StatefulWidget {
+  const ShimmerLoadingWidget({
     super.key,
   });
 
   @override
-  State<ExampleUiLoadingAnimation> createState() =>
-      _ExampleUiLoadingAnimationState();
+  State<ShimmerLoadingWidget> createState() => _ShimmerLoadingWidgetState();
 }
 
-class _ExampleUiLoadingAnimationState extends State<ExampleUiLoadingAnimation> {
+class _ShimmerLoadingWidgetState extends State<ShimmerLoadingWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,6 +26,8 @@ class _ExampleUiLoadingAnimationState extends State<ExampleUiLoadingAnimation> {
           itemBuilder: (BuildContext context, int index) {
             return Card(
               // color: CustomeColor.backgroundCardColor,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0)),
               child: ShimmerLoading(
                 child: ListTile(
                   leading: Container(
@@ -42,12 +43,6 @@ class _ExampleUiLoadingAnimationState extends State<ExampleUiLoadingAnimation> {
                     margin: const EdgeInsets.only(top: 8.0),
                     color: Colors.grey[300],
                   ),
-                  // subtitle: Container(
-                  //   width: double.infinity,
-                  //   height: 12.0,
-                  //   margin: const EdgeInsets.only(top: 8.0),
-                  //   color: Colors.grey[300],
-                  // ),
                   trailing: Container(
                     width: 48.0,
                     height: 16.0,
@@ -62,17 +57,6 @@ class _ExampleUiLoadingAnimationState extends State<ExampleUiLoadingAnimation> {
           },
           itemCount: 10,
         ),
-        // child: ListView(
-        //   physics: _isLoading ? const NeverScrollableScrollPhysics() : null,
-        //   children: [
-        //     const SizedBox(height: 16),
-        //     _buildTopRowList(),
-        //     const SizedBox(height: 16),
-        //     _buildListItem(),
-        //     _buildListItem(),
-        //     _buildListItem(),
-        //   ],
-        // ),
       ),
     );
   }

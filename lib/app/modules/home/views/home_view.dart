@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:music/app/data/constant/assets_icon_constant.dart';
 import 'package:music/app/data/constant/colors_constant.dart';
+import 'package:music/app/modules/home/widgets/card_item_widget.dart.dart';
 import 'package:music/app/modules/home/widgets/simmer_effect.dart';
 import 'package:music/app/modules/utils/font_utils.dart';
 
@@ -25,7 +27,7 @@ class HomeView extends GetView<HomeController> {
                   margin: const EdgeInsets.only(top: 30, bottom: 20),
                   child: Text(
                     'Hello Ayushi',
-                    style: SafeGoogleFont(
+                    style: safeGoogleFont(
                       'Raleway',
                       fontSize: 30,
                       fontWeight: FontWeight.w600,
@@ -59,7 +61,7 @@ class HomeView extends GetView<HomeController> {
                                 ),
                               ),
                               hintText: "Search...",
-                              hintStyle: SafeGoogleFont(
+                              hintStyle: safeGoogleFont(
                                 'Raleway',
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
@@ -80,7 +82,7 @@ class HomeView extends GetView<HomeController> {
                         width: 44,
                         height: 44,
                         child: Image.asset(
-                          'assets/page-1/images/frame-11.png',
+                          IconAssets.notificationIcon,
                           width: 44,
                           height: 44,
                         ),
@@ -97,70 +99,39 @@ class HomeView extends GetView<HomeController> {
               init: controller,
               initState: (_) {},
               builder: (_) {
-                return controller.isLoadingMusic
-                    ? const Flexible(child: ExampleUiLoadingAnimation())
-                    // ? Flexible(
-                    //     child: ListView.separated(
-                    //         itemBuilder: (context, index) {
-                    //           return Skeleton(
-                    //             height: 60,
-                    //             width: MediaQuery.of(context).size.width,
-                    //           );
-                    //         },
-                    //         separatorBuilder: (context, index) {
-                    //           return const SizedBox(
-                    //             height: 10,
-                    //           );
-                    //         },
-                    //         itemCount: 10))
-                    : Flexible(
-                        child: ListView.separated(
-                          itemBuilder: (context, index) {
-                            return GestureDetector(
-                              onTap: () => Get.toNamed('./play-music',
-                                  arguments: {
-                                    "music": controller.musicList[index]
-                                  }),
-                              child: Card(
-                                color: CustomeColor.backgroundCardColor,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10.0)),
-                                child: ListTile(
-                                  leading: Image.asset(
-                                    'assets/page-1/images/group-4-EGv.png',
-                                    width: 36.14,
-                                    height: 36.14,
-                                  ),
-                                  title: Text(
-                                    controller.musicList[index].name,
-                                    style: SafeGoogleFont(
-                                      'Raleway',
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w600,
-                                      color: CustomeColor.textColor,
-                                    ),
-                                  ),
-                                  trailing: Text(
-                                    '2:48',
-                                    style: SafeGoogleFont(
-                                      'Inter',
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w500,
-                                      color: CustomeColor.trailingColor,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            );
-                          },
-                          separatorBuilder: (context, index) {
-                            return const SizedBox(
-                              height: 10,
-                            );
-                          },
-                          itemCount: controller.musicList.length,
+                // returning a visibility widget that will render shimmer loading widget when music loading is true
+                return Visibility(
+                  visible: controller.isLoadingMusic,
+                  replacement: Visibility(
+                    // if music list is not empty the it will render music item else showing text "no music"
+                    replacement: const Center(
+                      child: Text(
+                        "There is no music to play",
+                        style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.w600,
                         ),
-                      );
+                      ),
+                    ),
+                    visible: controller.musicList.isNotEmpty,
+                    child: Flexible(
+                      child: ListView.separated(
+                        itemBuilder: (context, index) {
+                          return MusicItemListWidget(
+                            music: controller.musicList[index],
+                          );
+                        },
+                        separatorBuilder: (context, index) {
+                          return const SizedBox(
+                            height: 10,
+                          );
+                        },
+                        itemCount: controller.musicList.length,
+                      ),
+                    ),
+                  ),
+                  child: const Flexible(child: ShimmerLoadingWidget()),
+                );
               },
             ),
           ],

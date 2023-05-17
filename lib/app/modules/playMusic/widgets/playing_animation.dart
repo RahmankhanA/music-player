@@ -1,11 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+
 import 'package:flutter/material.dart';
 
 class MusicPlayerScreen extends StatefulWidget {
-
   const MusicPlayerScreen({
     Key? key,
-
   }) : super(key: key);
 
   @override
@@ -25,14 +24,10 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen>
       duration: const Duration(milliseconds: 500),
     )..repeat(reverse: true);
     _animation = Tween<double>(begin: 1, end: 0).animate(_animationController);
-
-
   }
-
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -44,23 +39,24 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen>
               builder: (context, child) {
                 return Row(
                     children: List.generate(
-                  6,
+                  5,
                   (outerIndex) {
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: List.generate(
-                        4,
+                        5,
                         (index) {
+                          index = index < 4 ? index : index - 2;
                           return Row(
                             children: [
                               Container(
                                 width: 3,
-                                height: 20 *
-                                    _animation.value *
-                                    (0.5 + index ),
+                                height: 20 * _animation.value * (0.5 + index),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(5),
-                                  color:outerIndex<4 ?Colors.blue:Colors.black,
+                                  color: outerIndex < 4
+                                      ? Colors.blue
+                                      : Colors.black,
                                 ),
                                 // child: const SizedBox(width: 5),
                               ),
@@ -85,5 +81,4 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen>
     _animationController.dispose();
     super.dispose();
   }
-
 }

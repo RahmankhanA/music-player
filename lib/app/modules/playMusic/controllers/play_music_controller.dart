@@ -7,7 +7,7 @@ import 'package:music/app/data/models/music_model.dart';
 
 class PlayMusicController extends GetxController {
   late MusicModel musicModel;
-
+ bool isExpanded=false;
   AudioPlayer player = AudioPlayer();
 
   @override
@@ -15,8 +15,9 @@ class PlayMusicController extends GetxController {
     super.onInit();
 
     musicModel = Get.arguments['music'];
-   
+
     playMusic();
+
   }
 
   @override
@@ -27,12 +28,13 @@ class PlayMusicController extends GetxController {
 
   void playMusic() async {
     try {
-      log(musicModel.audioUrl);
+
 
       await player.setUrl(musicModel.audioUrl);
-      log(player.duration.toString());
+
+
       await player.play();
-      log("playing...");
+      
       musicModel.isPlaying = true;
           update();
     } catch (err) {
@@ -66,5 +68,10 @@ class PlayMusicController extends GetxController {
     }
     // player.pause();
 
+  }
+
+  void toggleIsExpanded(){
+    isExpanded=!isExpanded;
+    update();
   }
 }
