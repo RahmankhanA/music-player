@@ -81,7 +81,7 @@ class _BottomMusicControllWidgetState extends State<BottomMusicControllWidget> {
               Container(
                 margin: const EdgeInsets.only(top: 20),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(50.0),
+                  borderRadius: BorderRadius.circular(25.0),
                   child: Image.network(
                    playMusicController.musicModel.imageUrl ,
                     width: 180,
@@ -106,7 +106,7 @@ class _BottomMusicControllWidgetState extends State<BottomMusicControllWidget> {
               //   height: 20,
               // ),
               Text(
-                "Malika",
+               playMusicController.musicModel.name,
                 textAlign: TextAlign.center,
                 style: safeGoogleFont(
                   'Nunito',

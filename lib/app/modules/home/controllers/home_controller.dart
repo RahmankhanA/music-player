@@ -8,6 +8,7 @@ import 'package:music/app/modules/services/music_service.dart';
 class HomeController extends GetxController {
   // for storing the all music list
   List<MusicModel> musicList = [];
+  List<MusicModel> duplicateMusicList = [];
 
   bool isLoadingMusic = false;
 
@@ -39,6 +40,7 @@ class HomeController extends GetxController {
         for (var element in data) {
           musicList.add(MusicModel.fromMap(element));
         }
+        duplicateMusicList = [...musicList];
       } catch (err) {
         log("erro is : $err");
       }
@@ -46,6 +48,17 @@ class HomeController extends GetxController {
     // set Music loading false
     isLoadingMusic = false;
     // updating ui
+    await Future.delayed(const Duration(seconds: 2));
+    update();
+  }
+
+  searchMusic(String musicName) {
+    musicList.clear();
+    for (MusicModel music in duplicateMusicList) {
+      if (music.name.toLowerCase().contains(musicName.toLowerCase())) {
+        musicList.add(music);
+      }
+    }
     update();
   }
 }

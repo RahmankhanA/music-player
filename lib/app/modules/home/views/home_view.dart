@@ -72,6 +72,10 @@ class HomeView extends GetView<HomeController> {
                                 Icons.search,
                                 color: CustomeColor.textFieldColor,
                               )),
+
+                              onChanged: (value) {
+                                controller.searchMusic(value);
+                              },
                         ),
                       ),
                       const SizedBox(

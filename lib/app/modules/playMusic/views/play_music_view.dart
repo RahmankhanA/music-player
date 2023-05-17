@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:music/app/data/constant/colors_constant.dart';
@@ -15,7 +13,6 @@ class PlayMusicView extends GetView<PlayMusicController> {
   const PlayMusicView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    log(controller.player.toString());
     return Scaffold(
       backgroundColor: CustomeColor.backgroundColor,
       body: SafeArea(
@@ -24,11 +21,8 @@ class PlayMusicView extends GetView<PlayMusicController> {
           child: Stack(
             children: [
               const BackgroundImageAnimationWidget(),
-
               const BuildingShadowWidget(),
-
               const AnimationForGirlWidget(),
-
               Positioned(
                 // thejourneybeginsinsidedmp (1:203)
                 left: 96.5003662109,
