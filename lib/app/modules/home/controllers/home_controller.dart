@@ -48,7 +48,7 @@ class HomeController extends GetxController {
     // set Music loading false
     isLoadingMusic = false;
     // updating ui
-    await Future.delayed(const Duration(seconds: 2));
+  
     update();
   }
 
