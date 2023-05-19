@@ -23,6 +23,7 @@ class HomeController extends GetxController {
   fetchMusic() async {
     // making music list empty
     musicList.clear();
+    duplicateMusicList.clear();
 
     // set Music loading true
     isLoadingMusic = true;
@@ -48,7 +49,7 @@ class HomeController extends GetxController {
     // set Music loading false
     isLoadingMusic = false;
     // updating ui
-  
+
     update();
   }
 
